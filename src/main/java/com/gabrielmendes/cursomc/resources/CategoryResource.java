@@ -1,26 +1,27 @@
 package com.gabrielmendes.cursomc.resources;
 
 import com.gabrielmendes.cursomc.domain.Category;
+import com.gabrielmendes.cursomc.services.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource implements Serializable {
+    @Autowired
+    private CategoryService categoryService;
 
-    @GetMapping
-    public List<Category> list(){
-        Category cat1 = new Category(1, "Informatic");
-        Category cat2 = new Category(2, "Office");
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Integer id){
+        Category category = categoryService.findById(id);
 
-        List<Category> categoryList = Arrays.asList(cat1, cat2);
-
-        return categoryList;
+        return ResponseEntity.ok(category);
     }
 
 }
