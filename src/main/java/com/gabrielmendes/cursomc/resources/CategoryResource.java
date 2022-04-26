@@ -21,7 +21,7 @@ public class CategoryResource implements Serializable {
     public ResponseEntity<Category> findById(@PathVariable Integer id){
         Category category = categoryService.findById(id);
 
-        return ResponseEntity.ok(category);
+        return ResponseEntity.ok().body(category);
     }
 
 }

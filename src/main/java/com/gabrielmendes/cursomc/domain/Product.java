@@ -1,5 +1,6 @@
 package com.gabrielmendes.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "PRODUCT_CATEGORY",
                joinColumns = @JoinColumn(name = "product_id"),

@@ -1,6 +1,7 @@
 package com.gabrielmendes.cursomc.services;
 
 import com.gabrielmendes.cursomc.domain.Category;
+import com.gabrielmendes.cursomc.exceptions.ObjectNotFoundException;
 import com.gabrielmendes.cursomc.repositories.CategoryRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class CategoryService {
     public Category findById(int id){
         Optional<Category> category = categoryRespository.findById(id);
 
-        return category.orElse(null);
+        return category.orElseThrow(() -> new ObjectNotFoundException(
+                "Object not found! Id: " + id + ", Type: " + Category.class.getName()));
     }
 
 }
